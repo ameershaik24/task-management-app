@@ -10,6 +10,6 @@ class Task(BaseModel):
                                        "In Progress"), (DONE, "Done")]
 
     title = models.CharField(max_length=100)
-    description = models.TextField()
+    description = models.TextField(null=True, blank=True)
 
     status = models.CharField(max_length=20, choices=TASK_STATUSES)
