@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { Router } from "@angular/router";
 import { Observable } from "rxjs";
 
 import { AuthToken } from "../interfaces/auth-token";
@@ -13,7 +14,7 @@ export class AuthService {
 
   serverUrl: string = "http://localhost:8000";
 
-  constructor(private http: HttpClient, private localService: LocalService) { }
+  constructor(private http: HttpClient, private localService: LocalService, private router: Router) { }
 
   signup(payload: any): Observable<User> {
     const apiEndpoint = "/signup";
@@ -31,7 +32,7 @@ export class AuthService {
 
   logOut(): void {
     this.localService.removeData("AuthToken");
-    // TODO - naviagte to home page
+    this.router.navigate(['']);
   }
 
   isLoggedIn(): boolean {
@@ -44,7 +45,7 @@ export class AuthService {
       this.logOut();
     }
     else {
-      // TODO - naviagte to login page
+      this.router.navigate(['/login']);
     }
   }
 }
