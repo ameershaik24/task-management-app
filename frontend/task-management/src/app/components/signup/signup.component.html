@@ -1,0 +1,26 @@
+<div class="container">
+    <div>
+        Sign up
+    </div>
+    <div class="mt-5">
+        <form [formGroup]="signUpForm">
+            <div class="mb-3">
+                <label for="signUpUsernameInput" class="form-label">Username</label>
+                <input type="text" class="form-control" id="signUpUsernameInput" formControlName="username">
+            </div>
+            <div class="mb-3">
+                <label for="signUpPasswordInput" class="form-label">Password</label>
+                <input type="password" id="signUpPasswordInput" class="form-control" formControlName="password">
+            </div>
+            <div class="mb-3">
+                <label for="signUpEmailInput" class="form-label">Email</label>
+                <input type="text" id="signUpEmailInput" class="form-control" formControlName="email">
+            </div>
+
+            <div class="mt-5">
+                <button class="btn btn-outline-success" (click)="signup()" [disabled]="!signUpForm.valid">Sign
+                    Up</button>
+            </div>
+        </form>
+    </div>
+</div>
