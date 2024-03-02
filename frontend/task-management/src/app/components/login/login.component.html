@@ -1,0 +1,21 @@
+<div class="container">
+    <div>
+        Login
+    </div>
+    <div class="mt-5">
+        <form [formGroup]="loginForm">
+            <div class="mb-3">
+                <label for="loginUsernameInput" class="form-label">Username</label>
+                <input type="text" class="form-control" id="loginUsernameInput" formControlName="username">
+            </div>
+            <div class="mb-3">
+                <label for="loginPasswordInput" class="form-label">Password</label>
+                <input type="password" id="loginPasswordInput" class="form-control" formControlName="password">
+            </div>
+
+            <div class="mt-5">
+                <button class="btn btn-outline-success" (click)="login()" [disabled]="!loginForm.valid">Login</button>
+            </div>
+        </form>
+    </div>
+</div>
