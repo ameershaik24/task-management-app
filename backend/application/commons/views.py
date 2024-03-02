@@ -1,3 +1,9 @@
-from django.shortcuts import render
+from commons.serializers import UserSerializer
+from django.contrib.auth.models import User
+from rest_framework import generics, permissions
 
-# Create your views here.
+
+class CreateUserView(generics.CreateAPIView):
+    model = User
+    permission_classes = [permissions.AllowAny]  # Or anon users can't register
+    serializer_class = UserSerializer
