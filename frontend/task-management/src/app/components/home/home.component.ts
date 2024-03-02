@@ -28,6 +28,7 @@ export class HomeComponent implements OnInit {
   ];
 
   userTasks!: Task[];
+  statusFilter: string = "";
 
   constructor(private taskService: TaskService, private fb: FormBuilder) { }
 

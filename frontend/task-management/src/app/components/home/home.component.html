@@ -12,11 +12,26 @@
     </div>
 
     <div *ngIf="userTasks && userTasks.length > 0; else noTasksBlock">
-        <div class="tasks-div">
-            <div class="d-flex justify-content-between align-items-center mb-2">
+        <div class="tasks-div max-vw-100">
+            <div class="d-flex justify-content-between align-items-center">
+
                 <div>
                     Your tasks are
-                    <table class="table">
+                </div>
+                <div>
+                    <select class="form-select" aria-label="Status select" [(ngModel)]="statusFilter">
+                        <option value="">ALL</option>
+                        <option value="todo">To Do</option>
+                        <option value="in_progress">In Progress</option>
+                        <option value="done">Done</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <div>
+                <div class="my-4">
+                    <table class="table table-striped table-hover overflow-x-scroll">
                         <thead>
                             <tr>
                                 <th scope="col">Id</th>
@@ -27,23 +42,23 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let task of userTasks">
+                            <tr *ngFor="let task of userTasks | filter: statusFilter">
                                 <th scope="row">{{task.id}}</th>
                                 <td>{{task.title}}</td>
                                 <td>{{task.description}}</td>
                                 <td>{{task.status_display}}</td>
 
                                 <td>
-                                    <div class="row justify-content-between align-items-center p-2">
-                                        <div class="col d-flex justify-content-center">
-                                            <button type="button" class="btn btn-outline-dark mx-1"
+                                    <div class="row">
+                                        <div class="col">
+                                            <button type="button" class="btn btn-outline-dark"
                                                 (click)="openEditUserTask(task)" data-bs-toggle="modal"
                                                 data-bs-target="#addTaskModal">
                                                 Edit
                                             </button>
                                         </div>
-                                        <div class="col d-flex justify-content-center">
-                                            <button type="button" class="btn btn-outline-danger mx-1"
+                                        <div class="col">
+                                            <button type="button" class="btn btn-outline-danger"
                                                 (click)="deleteUserTask(task.id)">
                                                 Delete
                                             </button>

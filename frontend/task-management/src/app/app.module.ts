@@ -1,6 +1,6 @@
 import { HttpClientModule } from "@angular/common/http";
 import { NgModule } from "@angular/core";
-import { ReactiveFormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
 
 import { AppRoutingModule } from "./app-routing.module";
@@ -11,6 +11,7 @@ import { LandingPageComponent } from "./components/landing-page/landing-page.com
 import { LoginComponent } from "./components/login/login.component";
 import { SignupComponent } from "./components/signup/signup.component";
 import { httpInterceptorProviders } from "./interceptors";
+import { FilterPipe } from './pipes/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -19,12 +20,14 @@ import { httpInterceptorProviders } from "./interceptors";
     LandingPageComponent,
     LoginComponent,
     HomeComponent,
-    SignupComponent
+    SignupComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
     ReactiveFormsModule,
   ],
   providers: [httpInterceptorProviders],
