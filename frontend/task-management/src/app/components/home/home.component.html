@@ -1,1 +1,117 @@
-<p>home works!</p>
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center my-4">
+        <div>
+            <span>
+                Welcome to Task management app
+            </span>
+        </div>
+        <div>
+            <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#addTaskModal">Add
+                task</button>
+        </div>
+    </div>
+
+    <div *ngIf="userTasks && userTasks.length > 0; else noTasksBlock">
+        <div class="tasks-div">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <div>
+                    Your tasks are
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Id</th>
+                                <th scope="col">Title</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let task of userTasks">
+                                <th scope="row">{{task.id}}</th>
+                                <td>{{task.title}}</td>
+                                <td>{{task.description}}</td>
+                                <td>{{task.status_display}}</td>
+
+                                <td>
+                                    <div class="row justify-content-between align-items-center p-2">
+                                        <div class="col d-flex justify-content-center">
+                                            <button type="button" class="btn btn-outline-dark mx-1"
+                                                (click)="openEditUserTask(task)" data-bs-toggle="modal"
+                                                data-bs-target="#addTaskModal">
+                                                Edit
+                                            </button>
+                                        </div>
+                                        <div class="col d-flex justify-content-center">
+                                            <button type="button" class="btn btn-outline-danger mx-1"
+                                                (click)="deleteUserTask(task.id)">
+                                                Delete
+                                            </button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <ng-template #noTasksBlock>
+        <div>
+            <span>
+                No tasks present! Add a task to get started.
+            </span>
+        </div>
+    </ng-template>
+
+    <div class="modal fade" id="addTaskModal" tabindex="-1" aria-labelledby="addTaskModal" aria-hidden="true"
+        data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-4" id="addTaskModalLabel">Add Task</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        (click)="resetUserTask()"></button>
+                </div>
+
+                <div class="modal-body">
+                    <form [formGroup]="taskForm" (ngSubmit)="addOrUpdateUserTask()" id="taskForm">
+                        <div class="row mb-3">
+                            <label for="titleInput" class="col-sm-4 col-form-label">Title</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="titleInput" formControlName="title">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="descriptionTextarea" class="col-sm-4 col-form-label">Description</label>
+                            <div class="col-sm-8">
+                                <textarea class="form-control" id="descriptionTextarea" rows="3"
+                                    formControlName="description"></textarea>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="statusSelect" class="col-sm-4 col-form-label">Status</label>
+                            <div class="col-sm-8">
+                                <select class="form-select" aria-label="Status select" id="statusSelect"
+                                    formControlName="status">
+                                    <option [value]="status.value" *ngFor="let status of taskStatuses"
+                                        [label]="status.name"></option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                        (click)="resetUserTask()">Close</button>
+                    <button type="submit" class="btn btn-primary" form="taskForm"
+                        [disabled]="!taskForm.valid">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
